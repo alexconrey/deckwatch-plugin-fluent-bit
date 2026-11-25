@@ -107,6 +107,7 @@ pub fn provision_inner(req: &ResourceProvisionRequest) -> ResourceProvisionResul
         port: None,
         cpu: Some("50m".into()),
         memory: Some("64Mi".into()),
+        ..Default::default()
     });
 
     result
@@ -120,6 +121,7 @@ pub fn deprovision_inner(_req: &ResourceDeprovisionRequest) -> ResourceDeprovisi
     ResourceDeprovisionResult {
         errors: vec![],
         message: "Fluent Bit log-shipping sidecar will be removed from all application deployments on the next reconcile.".into(),
+        ..Default::default()
     }
 }
 
@@ -151,6 +153,7 @@ pub fn metadata() -> FnResult<Json<PluginMetadata>> {
             env_source: None,
         }],
         resources: vec![resource_decl()],
+        ..Default::default()
     }))
 }
 
@@ -190,6 +193,7 @@ mod tests {
                 .iter()
                 .map(|(k, v)| (k.to_string(), v.to_string()))
                 .collect(),
+            ..Default::default()
         }
     }
 
@@ -200,6 +204,7 @@ mod tests {
             resource_id: "log-shipper".into(),
             state: HashMap::new(),
             fields: HashMap::new(),
+            ..Default::default()
         }
     }
 
